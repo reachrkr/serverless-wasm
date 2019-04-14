@@ -1,0 +1,30 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: wasm-sample
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wasm-sample
+    spec:
+      containers:
+        - name: wasm-sample
+          image: reachkraj/wasm-sample
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10M
+            limits:
+              cpu: 20m
+              memory: 20M
+          ports:
+            - name: http
+              containerPort: 8080
+
